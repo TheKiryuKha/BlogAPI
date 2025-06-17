@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\User;
 
@@ -27,4 +28,12 @@ it('has avatar', function () {
 
     expect($user->image->count())->toBe(1)
         ->and($user->image)->toBeInstanceOf(Image::class);
+});
+
+it('has categories', function () {
+    $user = User::factory()
+        ->has(Category::factory()->count(3))
+        ->create();
+
+    expect($user->categories)->toHaveCount(3);
 });

@@ -50,14 +50,14 @@ final class UserFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes): array => [
-            'admin' => UserRole::Admin,
+            'role' => UserRole::Admin,
         ]);
     }
 
     public function author(): static
     {
         return $this->state(fn (array $attributes): array => [
-            'admin' => UserRole::Author,
+            'role' => UserRole::Author,
         ]);
     }
 }

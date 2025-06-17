@@ -6,6 +6,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -34,6 +35,14 @@ final class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * @return MorphOne<Image, $this>
+     */
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'owner');
+    }
 
     /**
      * Get the attributes that should be cast.

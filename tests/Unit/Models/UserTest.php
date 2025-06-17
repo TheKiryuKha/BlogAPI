@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Image;
 use App\Models\User;
 
 test('to array', function () {
@@ -17,4 +18,13 @@ test('to array', function () {
         'created_at',
         'updated_at',
     ]);
+});
+
+it('has avatar', function () {
+    $user = User::factory()
+        ->has(Image::factory(), 'image')
+        ->create();
+
+    expect($user->image->count())->toBe(1)
+        ->and($user->image)->toBeInstanceOf(Image::class);
 });

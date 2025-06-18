@@ -45,7 +45,7 @@ final class User extends Authenticatable
     /**
      * @return MorphOne<Image, $this>
      */
-    public function image(): MorphOne
+    public function avatar(): MorphOne
     {
         return $this->morphOne(Image::class, 'owner');
     }

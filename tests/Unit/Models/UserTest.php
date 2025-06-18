@@ -26,11 +26,11 @@ test('to array', function () {
 
 it('has avatar', function () {
     $user = User::factory()
-        ->has(Image::factory(), 'image')
+        ->has(Image::factory(), 'avatar')
         ->create();
 
-    expect($user->image->count())->toBe(1)
-        ->and($user->image)->toBeInstanceOf(Image::class);
+    expect($user->avatar->count())->toBe(1)
+        ->and($user->avatar)->toBeInstanceOf(Image::class);
 });
 
 it('has categories', function () {

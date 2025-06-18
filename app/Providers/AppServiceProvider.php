@@ -39,17 +39,17 @@ final class AppServiceProvider extends ServiceProvider
 
     public function configureModels(): void
     {
+        Model::shouldBeStrict(! $this->app->isProduction());
         Model::unguard();
-        Model::shouldBeStrict();
     }
 
     public function configureCommands(): void
     {
-        DB::prohibitDestructiveCommands(app()->isProduction());
+        DB::prohibitDestructiveCommands($this->app->isProduction());
     }
 
     public function configureUrls(): void
     {
-        URL::forceHttps(app()->isProduction());
+        URL::forceHttps($this->app->isProduction());
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 
 test('to array', function () {
@@ -51,4 +52,14 @@ it('has Comments', function () {
 
     expect($post->comments)->toHaveCount(3)
         ->each->toBeInstanceOf(Comment::class);
+});
+
+it('has tags', function () {
+    $post = Post::factory()->create();
+    $tags = Tag::factory(3)->create();
+
+    $post->tags()->sync($tags);
+
+    expect($post->tags)->toHaveCount(3)
+        ->each->toBeInstanceOf(Tag::class);
 });

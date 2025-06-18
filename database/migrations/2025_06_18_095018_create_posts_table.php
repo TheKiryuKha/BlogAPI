@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,6 +22,13 @@ return new class extends Migration
             $table->string('slug');
             $table->text('content');
             $table->string('status');
+            $table->timestamps();
+        });
+
+        Schema::create('post_tag', function (Blueprint $table): void {
+            $table->id();
+            $table->foreignIdFor(Post::class)->constrained();
+            $table->foreignIdFor(Tag::class)->constrained();
             $table->timestamps();
         });
     }

@@ -54,6 +54,16 @@ final class User extends Authenticatable
     }
 
     /**
+     * Summary of tags
+     *
+     * @return HasMany<Tag, $this>
+     */
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

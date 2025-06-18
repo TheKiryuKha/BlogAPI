@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Tag;
 use App\Models\User;
 
 test('to array', function () {
@@ -36,4 +37,12 @@ it('has categories', function () {
         ->create();
 
     expect($user->categories)->toHaveCount(3);
+});
+
+it('has tags', function () {
+    $user = User::factory()
+        ->has(Tag::factory()->count(3))
+        ->create();
+
+    expect($user->tags)->toHaveCount(3);
 });

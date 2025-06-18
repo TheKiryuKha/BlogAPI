@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Post;
+use App\Models\User;
+
+test('to array', function () {
+    $post = Post::factory()->create()->fresh();
+
+    expect(array_keys($post->toArray()))->toBe([
+        'id',
+        'user_id',
+        'category_id',
+        'title',
+        'slug',
+        'content',
+        'status',
+        'created_at',
+        'updated_at',
+    ]);
+});
+
+it('has image', function () {
+    $post = Post::factory()
+        ->has(Image::factory(), 'image')
+        ->create();
+
+    expect($post->image->count())->toBe(1)
+        ->and($post->image)->toBeInstanceOf(Image::class);
+});
+
+it('belongs to User', function () {
+    $post = Post::factory()->create();
+
+    expect($post->user()->count())->toBe(1)
+        ->and($post->user)->toBeInstanceOf(User::class);
+});
+
+it('belongs to Category', function () {
+    $post = Post::factory()->create();
+
+    expect($post->category()->count())->toBe(1)
+        ->and($post->category)->toBeInstanceOf(Category::class);
+});

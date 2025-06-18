@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 
 test('to array', function () {
@@ -24,4 +25,12 @@ it('belongs to User', function () {
 
     expect($category->user->count())->toBe(1)
         ->and($category->user)->toBeInstanceOf(User::class);
+});
+
+it('has posts', function () {
+    $category = Category::factory()
+        ->has(Post::factory()->count(3))
+        ->create();
+
+    expect($category->posts)->toHaveCount(3);
 });

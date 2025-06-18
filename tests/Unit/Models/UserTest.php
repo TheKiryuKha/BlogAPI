@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 
@@ -45,4 +46,12 @@ it('has tags', function () {
         ->create();
 
     expect($user->tags)->toHaveCount(3);
+});
+
+it('has posts', function () {
+    $user = User::factory()
+        ->has(Post::factory()->count(3))
+        ->create();
+
+    expect($user->posts)->toHaveCount(3);
 });

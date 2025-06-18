@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Image;
+use App\Models\Post;
 use App\Models\User;
 
 test('to array', function () {
@@ -25,4 +26,13 @@ it('morphTo User', function () {
 
     expect($image->owner->count())->toBe(1)
         ->and($image->owner)->toBeInstanceOf(User::class);
+});
+
+it('morphTo Post', function () {
+    $image = Image::factory()
+        ->for(Post::factory(), 'owner')
+        ->create();
+
+    expect($image->owner->count())->toBe(1)
+        ->and($image->owner)->toBeInstanceOf(Post::class);
 });

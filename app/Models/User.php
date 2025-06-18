@@ -6,12 +6,31 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property-read int $id
+ * @property-read string $name
+ * @property-read string $role
+ * @property-read string $description
+ * @property-read string $email
+ * @property-read CarbonImmutable $email_verified_at
+ * @property-read string $password
+ * @property-read string|null $remember_token
+ * @property-read CarbonImmutable $created_at
+ * @property-read CarbonImmutable $updated_at
+ * @property-read Image $avatar
+ * @property-read Collection<int, Post> $posts
+ * @property-read Collection<int, Comment> $comments
+ * @property-read Collection<int, Category> $categories
+ * @property-read Collection<int, Tag> $tags
+ */
 final class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */

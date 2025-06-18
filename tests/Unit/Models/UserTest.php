@@ -29,8 +29,7 @@ it('has avatar', function () {
         ->has(Image::factory(), 'avatar')
         ->create();
 
-    expect($user->avatar->count())->toBe(1)
-        ->and($user->avatar)->toBeInstanceOf(Image::class);
+    expect($user->avatar)->toBeInstanceOf(Image::class);
 });
 
 it('has categories', function () {

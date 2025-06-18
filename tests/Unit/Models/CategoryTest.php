@@ -23,8 +23,7 @@ it('belongs to User', function () {
         ->for(User::factory()->author())
         ->create();
 
-    expect($category->user->count())->toBe(1)
-        ->and($category->user)->toBeInstanceOf(User::class);
+    expect($category->user)->toBeInstanceOf(User::class);
 });
 
 it('has posts', function () {

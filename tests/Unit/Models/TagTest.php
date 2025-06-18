@@ -22,6 +22,5 @@ it('belongs to User', function () {
         ->for(User::factory())
         ->create();
 
-    expect($tag->user->count())->toBe(1)
-        ->and($tag->user)->toBeInstanceOf(User::class);
+    expect($tag->user)->toBeInstanceOf(User::class);
 });

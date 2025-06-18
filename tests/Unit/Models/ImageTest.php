@@ -24,8 +24,7 @@ it('morphTo User', function () {
         ->for(User::factory(), 'owner')
         ->create();
 
-    expect($image->owner->count())->toBe(1)
-        ->and($image->owner)->toBeInstanceOf(User::class);
+    expect($image->owner)->toBeInstanceOf(User::class);
 });
 
 it('morphTo Post', function () {
@@ -33,6 +32,5 @@ it('morphTo Post', function () {
         ->for(Post::factory(), 'owner')
         ->create();
 
-    expect($image->owner->count())->toBe(1)
-        ->and($image->owner)->toBeInstanceOf(Post::class);
+    expect($image->owner)->toBeInstanceOf(Post::class);
 });

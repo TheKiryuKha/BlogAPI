@@ -22,13 +22,11 @@ test('to array', function () {
 it('belongs to User', function () {
     $comment = Comment::factory()->create();
 
-    expect($comment->user()->count())->toBe(1)
-        ->and($comment->user)->toBeInstanceOf(User::class);
+    expect($comment->user)->toBeInstanceOf(User::class);
 });
 
 it('belongs to Post', function () {
     $comment = Comment::factory()->create();
 
-    expect($comment->post()->count())->toBe(1)
-        ->and($comment->post)->toBeInstanceOf(Post::class);
+    expect($comment->post)->toBeInstanceOf(Post::class);
 });

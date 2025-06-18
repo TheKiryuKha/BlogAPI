@@ -49,5 +49,6 @@ it('has Comments', function () {
         ->has(Comment::factory()->count(3))
         ->create();
 
-    expect($post->comments)->toHaveCount(3);
+    expect($post->comments)->toHaveCount(3)
+        ->each->toBeInstanceOf(Comment::class);
 });

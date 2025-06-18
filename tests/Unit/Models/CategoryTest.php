@@ -31,5 +31,6 @@ it('has posts', function () {
         ->has(Post::factory()->count(3))
         ->create();
 
-    expect($category->posts)->toHaveCount(3);
+    expect($category->posts)->toHaveCount(3)
+        ->each->toBeInstanceOf(Post::class);
 });

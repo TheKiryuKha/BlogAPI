@@ -37,7 +37,8 @@ it('has categories', function () {
         ->has(Category::factory()->count(3))
         ->create();
 
-    expect($user->categories)->toHaveCount(3);
+    expect($user->categories)->toHaveCount(3)
+        ->each->toBeInstanceOf(Category::class);
 });
 
 it('has tags', function () {
@@ -45,7 +46,8 @@ it('has tags', function () {
         ->has(Tag::factory()->count(3))
         ->create();
 
-    expect($user->tags)->toHaveCount(3);
+    expect($user->tags)->toHaveCount(3)
+        ->each->toBeInstanceOf(Tag::class);
 });
 
 it('has posts', function () {
@@ -53,7 +55,8 @@ it('has posts', function () {
         ->has(Post::factory()->count(3))
         ->create();
 
-    expect($user->posts)->toHaveCount(3);
+    expect($user->posts)->toHaveCount(3)
+        ->each->toBeInstanceOf(Post::class);
 });
 
 it('has comments', function () {
@@ -61,5 +64,6 @@ it('has comments', function () {
         ->has(Comment::factory()->count(3))
         ->create();
 
-    expect($user->comments)->toHaveCount(3);
+    expect($user->comments)->toHaveCount(3)
+        ->each->toBeInstanceOf(Comment::class);
 });

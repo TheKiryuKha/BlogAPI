@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
@@ -54,4 +55,12 @@ it('has posts', function () {
         ->create();
 
     expect($user->posts)->toHaveCount(3);
+});
+
+it('has comments', function () {
+    $user = User::factory()
+        ->has(Comment::factory()->count(3))
+        ->create();
+
+    expect($user->comments)->toHaveCount(3);
 });

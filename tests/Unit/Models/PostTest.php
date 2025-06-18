@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
@@ -44,4 +45,12 @@ it('belongs to Category', function () {
 
     expect($post->category()->count())->toBe(1)
         ->and($post->category)->toBeInstanceOf(Category::class);
+});
+
+it('has Comments', function () {
+    $post = Post::factory()
+        ->has(Comment::factory()->count(3))
+        ->create();
+
+    expect($post->comments)->toHaveCount(3);
 });

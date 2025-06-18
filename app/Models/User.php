@@ -54,6 +54,14 @@ final class User extends Authenticatable
     }
 
     /**
+     * @return HasMany<Comment, $this>
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * @return HasMany<Category, $this>
      */
     public function categories(): HasMany
@@ -62,8 +70,6 @@ final class User extends Authenticatable
     }
 
     /**
-     * Summary of tags
-     *
      * @return HasMany<Tag, $this>
      */
     public function tags(): HasMany

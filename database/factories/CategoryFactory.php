@@ -21,7 +21,6 @@ final class CategoryFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'user_id' => User::factory()->author(),
         ];
     }
 }

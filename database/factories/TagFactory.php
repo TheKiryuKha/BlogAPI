@@ -21,7 +21,6 @@ final class TagFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'user_id' => User::factory(),
         ];
     }
 }

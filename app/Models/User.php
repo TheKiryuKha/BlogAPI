@@ -28,8 +28,6 @@ use Illuminate\Notifications\Notifiable;
  * @property-read Image $avatar
  * @property-read Collection<int, Post> $posts
  * @property-read Collection<int, Comment> $comments
- * @property-read Collection<int, Category> $categories
- * @property-read Collection<int, Tag> $tags
  */
 final class User extends Authenticatable
 {
@@ -83,22 +81,6 @@ final class User extends Authenticatable
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * @return HasMany<Category, $this>
-     */
-    public function categories(): HasMany
-    {
-        return $this->hasMany(Category::class);
-    }
-
-    /**
-     * @return HasMany<Tag, $this>
-     */
-    public function tags(): HasMany
-    {
-        return $this->hasMany(Tag::class);
     }
 
     /**

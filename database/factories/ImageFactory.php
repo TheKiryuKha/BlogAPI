@@ -31,7 +31,7 @@ final class ImageFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'owner_type' => 'post',
-            'owner_id' => Post::factory()
+            'owner_id' => Post::factory(),
         ]);
     }
 }

@@ -18,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int $id
  * @property-read string $name
  * @property-read string $role
- * @property-read string $description
+ * @property-read string|null $description
  * @property-read string $email
  * @property-read CarbonImmutable $email_verified_at
  * @property-read string $password

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
 
 test('to array', function () {
     $category = Category::factory()->create()->fresh();

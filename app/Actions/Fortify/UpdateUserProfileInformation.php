@@ -31,7 +31,9 @@ final class UpdateUserProfileInformation implements UpdatesUserProfileInformatio
             ],
         ])->validateWithBag('updateProfileInformation');
 
+        // @phpstan-ignore booleanAnd.alwaysFalse
         if ($input['email'] !== $user->email &&
+            // @phpstan-ignore instanceof.alwaysFalse 
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {

@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
-use App\Models\Tag;
 use App\Models\User;
 
 test('to array', function () {

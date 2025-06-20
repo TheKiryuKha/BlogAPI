@@ -40,5 +40,10 @@ final class UserSeeder extends Seeder
         User::factory()
             ->count(20)
             ->create();
+
+        User::factory()->create([
+            'email' => 'test@gmail.com',
+            'password' => 'test',
+        ]);
     }
 }

@@ -18,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property-read int $id
  * @property-read string $name
- * @property-read string $role
+ * @property-read UserRole $role
  * @property-read string|null $description
  * @property-read string $email
  * @property-read CarbonImmutable $email_verified_at
@@ -32,11 +32,12 @@ use Laravel\Sanctum\HasApiTokens;
  */
 final class User extends Authenticatable
 {
+    use HasApiTokens;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-    use HasApiTokens;
-    use Notifiable;
 
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.

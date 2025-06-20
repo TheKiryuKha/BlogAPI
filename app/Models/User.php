@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\PersonalAccessToken;
 
 /**
  * @property-read int $id
@@ -29,6 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read Image $avatar
  * @property-read Collection<int, Post> $posts
  * @property-read Collection<int, Comment> $comments
+ * @property-read Collection<int, PersonalAccessToken> $tokens
  */
 final class User extends Authenticatable
 {

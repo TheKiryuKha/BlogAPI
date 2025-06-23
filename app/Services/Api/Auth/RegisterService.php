@@ -6,18 +6,20 @@ namespace App\Services\Api\Auth;
 
 use App\Enums\UserRole;
 use App\Models\User;
-use App\Payloads\Api\Auth\LoginPayload;
+use App\Payloads\Api\Auth\RegisterPayload;
 use Illuminate\Auth\AuthManager;
 use Laravel\Sanctum\NewAccessToken;
 
-final readonly class IdentityService
+final readonly class RegisterService
 {
     public function __construct(
         private AuthManager $auth
     ) {}
 
-    public function login(LoginPayload $payload): bool
+    public function register(RegisterPayload $payload): bool
     {
+        $this->createUser($payload);
+
         return $this->auth->attempt(
             credentials: $payload->toArray()
         );
@@ -30,19 +32,14 @@ final readonly class IdentityService
 
         return $user->createToken(
             name: $user->name,
-            abilities: $this->getRoleAbilities($user)
+            abilities: [UserRole::Reader]
         );
     }
 
-    /**
-     * @return string[]
-     */
-    private function getRoleAbilities(User $user): array
+    private function createUser(RegisterPayload $payload): User
     {
-        return match ($user->role) {
-            UserRole::Reader => ['reader'],
-            UserRole::Author => ['author'],
-            UserRole::Admin => ['admin']
-        };
+        return User::create(
+            attributes: $payload->toArray()
+        );
     }
 }

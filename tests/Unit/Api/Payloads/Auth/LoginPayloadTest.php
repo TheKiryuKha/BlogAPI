@@ -12,5 +12,6 @@ it('makes new payload and returns its data in array', function () {
 
     $payload = LoginPayload::make($data);
 
-    expect($payload->toArray())->toBe($data);
+    expect($payload)->toBeInstanceOf(LoginPayload::class);
+    expect($payload->toArray())->toEqual($data);
 });

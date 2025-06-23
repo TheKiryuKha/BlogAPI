@@ -26,9 +26,7 @@ final readonly class LoginController
         }
 
         return new TokenResponse(
-            token: $this->service->createToken(
-                name: 'test'
-            )
+            token: $this->service->createToken()
         );
     }
 }

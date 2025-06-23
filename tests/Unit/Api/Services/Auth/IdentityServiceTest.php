@@ -17,7 +17,7 @@ it('logins user(reader) and creates token for him', function () {
 
     $this->assertTrue($service->login($payload));
 
-    $token = $service->createToken('test');
+    $token = $service->createToken();
 
     $this->assertTrue($token->accessToken->can('reader'));
 });
@@ -32,7 +32,7 @@ it('logins user(author) and creates token for him', function () {
 
     $this->assertTrue($service->login($payload));
 
-    $token = $service->createToken('test');
+    $token = $service->createToken();
 
     $this->assertTrue($token->accessToken->can('author'));
 });
@@ -47,7 +47,7 @@ it('logins user(admin) and creates token for him', function () {
 
     $this->assertTrue($service->login($payload));
 
-    $token = $service->createToken('test');
+    $token = $service->createToken();
 
     $this->assertTrue($token->accessToken->can('admin'));
 });

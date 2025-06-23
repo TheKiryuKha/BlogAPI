@@ -15,14 +15,14 @@ final readonly class RegisterPayload
         private string $password
     ) {}
 
-    /** @param array{email: string, name: string, password: string, role: UserRole} $data */
+    /** @param array{email: string, name: string, password: string} $data */
     public static function make(array $data): self
     {
         return new self(
             name: $data['name'],
-            role: $data['role'],
             email: $data['email'],
-            password: $data['password']
+            password: $data['password'],
+            role: UserRole::Reader
         );
     }
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('api')->as('api:')->middleware('auth:sunctum')->group(function () {    
+Route::prefix('api')->as('api:')->middleware('auth:sanctum')->group(function () {
     /**
      * Auth
      */
     Route::prefix('auth')->as('auth:')
-        ->withoutMiddleware(['auth:sunctum'])
+        ->withoutMiddleware(['auth:sanctum'])
         ->group(base_path('routes/api/auth.php'));
-    
+
     /**
      * V1
      */

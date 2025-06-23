@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Api\Auth;
 
-use App\Enums\UserRole;
 use App\Payloads\Api\Auth\RegisterPayload;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -36,7 +35,6 @@ final class RegisterRequest extends FormRequest
             'name' => $this->string('name')->toString(),
             'email' => $this->string('email')->toString(),
             'password' => $this->string('password')->toString(),
-            'role' => UserRole::Reader,
         ]);
     }
 }

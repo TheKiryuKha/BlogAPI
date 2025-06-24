@@ -15,7 +15,7 @@ final class IndexController
     {
         $posts = QueryBuilder::for(
             Category::class
-        )->allowedIncludes(['posts'])->paginate(1);
+        )->allowedIncludes(['posts'])->paginate(10);
 
         return CategoryResource::collection(
             $posts

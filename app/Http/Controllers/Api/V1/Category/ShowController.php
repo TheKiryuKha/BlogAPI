@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Category;
 
-use Illuminate\Http\Response;
+use App\Http\Resources\Api\V1\CategoryResource;
+use App\Models\Category;
+use Spatie\QueryBuilder\QueryBuilder;
 
 final class ShowController
 {
-    public function __invoke(): Response
+    public function __invoke(Category $category): CategoryResource
     {
-        return response(status: 200);
+        return new CategoryResource(
+            QueryBuilder::for(Category::where('id', $category->id))
+                ->allowedIncludes(['posts'])->first()
+        );
     }
 }

@@ -12,5 +12,5 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('categories')->as('categories:')->group(function () {
 
     Route::get('/', IndexController::class)->name('index');
-    Route::get('/{categories}', ShowController::class)->name('show');
+    Route::get('/{category}', ShowController::class)->name('show');
 });

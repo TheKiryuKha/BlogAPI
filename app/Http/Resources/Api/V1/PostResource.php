@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\Api\V1;
 
-use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property-read Category $resource
+ * @property-read Post $resource
  */
-final class CategoryResource extends JsonResource
+final class PostResource extends JsonResource
 {
     /**
+     * Transform the resource into an array.
+     *
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->resource->id,
-            'type' => 'category',
+            'type' => 'post',
             'attributes' => [
                 'title' => $this->resource->title,
+                'slug' => $this->resource->slug,
+                'content' => $this->resource->content,
+                'status' => $this->resource->status,
                 'created' => new DateResource(
-                    resource: $this->resource->created_at
+                    $this->resource->created_at
                 ),
             ],
-            'relationships' => [
-                'posts' => PostResource::collection(
-                    $this->whenLoaded('posts')
-                ),
-            ],
+            'relationships' => [],
             'links' => [
-                'self' => route('api:v1:categories:show', $this->resource->id),
-                'parent' => route('api:v1:categories:index'),
+                // todo
             ],
         ];
     }

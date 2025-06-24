@@ -4,26 +4,60 @@ declare(strict_types=1);
 
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Testing\Fluent\AssertableJson;
 
-beforeEach(fn () => $this->category = Category::factory()->create());
+beforeEach(fn () => $this->user = User::factory()->create());
 
 test('index endpoint', function () {
-    $user = User::factory()->create();
+    Category::factory()->create();
 
-    $this->actingAs($user)
-        ->get(route('api:v1:categories:index'))
-        ->assertStatus(200)
-        ->assertJson(function (AssertableJson $json) {
-            $json->has('data', 2)
-                ->has('data.1', function (AssertableJson $json) {
-                    $json->where('id', $this->category->id)
-                        ->where('type', 'category')
-                        ->where('attributes.title', $this->category->title)
-                        ->where('relationships', [])
-                        ->where('links.self', route('api:v1:categories:show', $this->category))
-                        ->where('links.parent', route('api:v1:categories:index'));
-                })
-                ->etc();
-        });
+    $response = $this->actingAs($this->user)
+        ->getJson(route('api:v1:categories:index'));
+
+    $response->assertOk()
+        ->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'type',
+                    'attributes' => ['title', 'created'],
+                    'relationships' => [],
+                    'links' => ['self', 'parent'],
+                ],
+            ],
+        ]);
+});
+
+test('index endpoint with posts included', function () {
+    Category::factory()->create();
+
+    $response = $this->actingAs($this->user)
+        ->getJson(
+            route(
+                'api:v1:categories:index',
+                ['include' => 'posts']
+            )
+        );
+
+    $response->assertOk()
+        ->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'type',
+                    'attributes' => ['title', 'created'],
+                    'relationships' => [
+                        'posts' => [
+                            '*' => [
+                                'id',
+                                'type',
+                                'attributes' => ['title', 'content', 'slug', 'status', 'created'],
+                                'relationships' => [],
+                                'links' => [],
+                            ],
+                        ],
+                    ],
+                    'links' => ['self', 'parent'],
+                ],
+            ],
+        ]);
 });

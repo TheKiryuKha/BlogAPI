@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Tag;
 
-use App\Http\Requests\Api\V1\Tag\StoreRequest;
+use App\Http\Requests\Api\V1\Tag\UpdateRequest;
 use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
 
-final class StoreController
+final class UpdateController
 {
-    public function __invoke(StoreRequest $request): JsonResponse
+    public function __invoke(Tag $tag, UpdateRequest $request): JsonResponse
     {
-        Tag::factory()->create(
+        $tag->update(
             $request->payload()->toArray()
         );
 
         return response()->json(
             data: [
-                'message' => 'Tag created succesfully',
+                'message' => 'Tag updated succesfully',
             ], status: 200
         );
     }

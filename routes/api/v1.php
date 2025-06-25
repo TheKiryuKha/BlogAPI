@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Api\V1\Category\BulkStoreController;
-use App\Http\Controllers\Api\V1\Category\DestroyController;
-use App\Http\Controllers\Api\V1\Category\IndexController;
-use App\Http\Controllers\Api\V1\Category\ShowController;
-use App\Http\Controllers\Api\V1\Category\StoreController;
-use App\Http\Controllers\Api\V1\Category\UpdateController;
+use App\Http\Controllers\Api\V1\Category;
+use App\Http\Controllers\Api\V1\Tag;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -15,10 +11,16 @@ use Illuminate\Support\Facades\Route;
  */
 Route::prefix('categories')->as('categories:')->group(function () {
 
-    Route::get('/', IndexController::class)->name('index'); // api:v1:categories:index
-    Route::post('/', StoreController::class)->name('store'); // api:v1:categories:store
-    Route::post('/bulk', BulkStoreController::class)->name('bulkStore'); // api:v1:categories:bulkStore
-    Route::get('/{category}', ShowController::class)->name('show'); // api:v1:categories:show
-    Route::patch('/{category}', UpdateController::class)->name('update'); // api:v1:categories:update
-    Route::delete('/{category}', DestroyController::class)->name('destroy'); // api:v1:categories:destroy
+    Route::get('/', Category\IndexController::class)->name('index'); 
+    Route::post('/', Category\StoreController::class)->name('store'); 
+    Route::post('/bulk', Category\BulkStoreController::class)->name('bulkStore'); 
+    Route::get('/{category}', Category\ShowController::class)->name('show'); 
+    Route::patch('/{category}', Category\UpdateController::class)->name('update'); 
+    Route::delete('/{category}', Category\DestroyController::class)->name('destroy'); 
+});
+
+
+Route::prefix('tags')->as('tags:')->group(function(){
+
+    Route::get('/', Tag\IndexController::class)->name('index');
 });

@@ -1,21 +1,20 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Http\Controllers\Api\V1\Tag;
 
-namespace App\Http\Controllers\Api\V1\Category;
-
-use App\Http\Resources\Api\V1\CategoryResource;
-use App\Models\Category;
+use App\Http\Resources\Api\V1\TagResource;
+use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Spatie\QueryBuilder\QueryBuilder;
 
-final class IndexController
+class IndexController
 {
     public function __invoke(): AnonymousResourceCollection
     {
-        return CategoryResource::collection(
+        return TagResource::collection(
             resource: QueryBuilder::for(
-                subject: Category::class
+                subject: Tag::class
             )->allowedIncludes(['posts'])->paginate(10)
         );
     }

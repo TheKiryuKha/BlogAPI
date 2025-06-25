@@ -1,41 +1,41 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Resources\Api\V1;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Tag;
 
 /**
- * @property-read Category $resource
+ * @property-read Tag $resource
  */
-final class CategoryResource extends JsonResource
+class TagResource extends JsonResource
 {
     /**
+     * Transform the resource into an array.
+     *
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->resource->id,
-            'type' => 'category',
+            'type' => 'tag',
             'attributes' => [
                 'title' => $this->resource->title,
                 'created' => new DateResource(
                     resource: $this->resource->created_at
-                ),
+                )
             ],
             'relationships' => [
                 'posts' => PostResource::collection(
                     resource: $this->whenLoaded('posts')
-                ),
+                )
             ],
             'links' => [
-                'self' => route('api:v1:categories:show', $this->resource->id),
-                'parent' => route('api:v1:categories:index'),
-            ],
+                'self' => 'todo',
+                'parent' => route('api:v1:tags:index')
+            ]
         ];
     }
 }

@@ -16,7 +16,7 @@ final readonly class DeleteCategory
             $category->posts()->update(['category_id' => 1]);
             $category->delete();
 
-            return $category->posts->load('category');
+            return $category->posts;
         });
     }
 }

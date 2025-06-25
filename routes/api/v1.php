@@ -26,6 +26,7 @@ Route::prefix('tags')->as('tags:')->group(function () {
 
     Route::get('/', Tag\IndexController::class)->name('index');
     Route::post('/', Tag\StoreController::class)->name('store');
+    Route::post('/bulk', Tag\BulkStoreController::class)->name('bulkStore');
     Route::get('/{tag}', Tag\ShowController::class)->name('show');
     Route::patch('/{tag}', Tag\UpdateController::class)->name('update');
     Route::delete('/{tag}', Tag\DestroyController::class)->name('destroy');

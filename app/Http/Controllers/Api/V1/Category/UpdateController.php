@@ -8,7 +8,7 @@ use App\Http\Requests\Api\V1\Category\UpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 
-class UpdateController
+final class UpdateController
 {
     public function __invoke(Category $category, UpdateRequest $request): JsonResponse
     {
@@ -18,8 +18,8 @@ class UpdateController
 
         return response()->json(
             data: [
-                'message' => 'category updated succesfully'
-            ]
+                'message' => 'category updated succesfully',
+            ], status: 200
         );
     }
 }

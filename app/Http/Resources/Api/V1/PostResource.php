@@ -26,6 +26,7 @@ final class PostResource extends JsonResource
             'attributes' => [
                 'title' => $this->resource->title,
                 'slug' => $this->resource->slug,
+                'category' => $this->resource->category->title,
                 'content' => $this->resource->content,
                 'status' => $this->resource->status,
                 'created' => new DateResource(

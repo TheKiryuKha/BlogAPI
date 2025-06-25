@@ -8,9 +8,7 @@ Route::prefix('api')->as('api:')->middleware('auth:sanctum')->group(function () 
     /**
      * Auth
      */
-    Route::prefix('auth')->as('auth:')
-        ->withoutMiddleware(['auth:sanctum'])
-        ->group(base_path('routes/api/auth.php'));
+    Route::prefix('auth')->as('auth:')->group(base_path('routes/api/auth.php'));
 
     /**
      * V1

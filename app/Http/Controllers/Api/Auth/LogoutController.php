@@ -12,7 +12,7 @@ final class LogoutController
     public function __invoke(): JsonResponse
     {
         /** @var User $user */
-        $user = auth()->user();
+        $user = request()->user();
 
         $user->tokens()->delete();
 

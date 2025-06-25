@@ -10,7 +10,7 @@ it('returns right data', function () {
     $resource = new DateResource($category->created_at);
 
     expect($resource->toArray(request()))->toEqual([
-        'human' => $category->created_at->diffForHumans(),
+        'human' => '0 seconds ago',
         'string' => $category->created_at->toDateTimeString(),
         'local' => $category->created_at->toDateTimeLocalString(),
         'timestamp' => $category->created_at->timestamp,

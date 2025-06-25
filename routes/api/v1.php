@@ -19,8 +19,11 @@ Route::prefix('categories')->as('categories:')->group(function () {
     Route::delete('/{category}', Category\DestroyController::class)->name('destroy'); 
 });
 
-
+/**
+ * Tags Endpoints
+ */
 Route::prefix('tags')->as('tags:')->group(function(){
 
     Route::get('/', Tag\IndexController::class)->name('index');
+    Route::get('/{tag}', Tag\ShowController::class)->name('show');
 });

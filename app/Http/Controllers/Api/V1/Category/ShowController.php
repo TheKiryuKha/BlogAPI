@@ -13,8 +13,9 @@ final class ShowController
     public function __invoke(Category $category): CategoryResource
     {
         return new CategoryResource(
-            QueryBuilder::for(Category::where('id', $category->id))
-                ->allowedIncludes(['posts'])->first()
+            resource: QueryBuilder::for(
+                subject: Category::where('id', $category->id)
+            )->allowedIncludes(['posts'])->first()
         );
     }
 }

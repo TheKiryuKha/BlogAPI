@@ -28,4 +28,5 @@ Route::prefix('tags')->as('tags:')->group(function () {
     Route::post('/', Tag\StoreController::class)->name('store');
     Route::get('/{tag}', Tag\ShowController::class)->name('show');
     Route::patch('/{tag}', Tag\UpdateController::class)->name('update');
+    Route::delete('/{tag}', Tag\DestroyController::class)->name('destroy');
 });

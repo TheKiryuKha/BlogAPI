@@ -33,8 +33,9 @@ test('user(admin) can store category', function () {
 
 test('user(reader) cannot store category', function () {
     $user = User::factory()->create();
+    $token = $user->createToken('reader', ['reader']);
 
-    $this->actingAs($user)
+    $this->withToken($token->plainTextToken)
         ->post(route('api:v1:categories:store', [
             'title' => 'Test',
         ]))

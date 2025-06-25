@@ -33,14 +33,8 @@ class BulkStoreRequest extends FormRequest
 
     public function payload(): Collection
     {
-        $collection = collect();
-        
-        foreach($this->validated() as $category){
-            $collection->push(
-                CategoryPayload::make($category)
-            );
-        }
-        
-        return $collection;
+        return collect($this->validated())->map(
+            fn (array $category): CategoryPayload => CategoryPayload::make($category) 
+        );
     }
 }

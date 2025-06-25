@@ -20,7 +20,7 @@ final readonly class BulkCreateCategories
         return DB::transaction(function() use($payloads) {
             return $payloads->map(
                 fn(CategoryPayload $payload): Category => Category::create(
-                    $payloads->toArray()
+                    $payload->toArray()
                 ) 
             );
         });

@@ -9,7 +9,7 @@ use App\Http\Requests\Api\V1\Category\BulkStoreRequest;
 use App\Http\Resources\Api\V1\CategoryResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class BulkStoreController
+final class BulkStoreController
 {
     public function __invoke(BulkStoreRequest $request, BulkCreateCategories $action): AnonymousResourceCollection
     {

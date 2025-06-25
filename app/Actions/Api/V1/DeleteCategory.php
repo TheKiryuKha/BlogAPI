@@ -12,7 +12,7 @@ final readonly class DeleteCategory
 {
     public function handle(Category $category): Collection
     {
-        return DB::transaction(function() use ($category){
+        return DB::transaction(function () use ($category) {
             $category->posts()->update(['category_id' => 1]);
             $category->delete();
 

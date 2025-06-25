@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources\Api\V1;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Tag;
 
 /**
  * @property-read Tag $resource
  */
-class TagResource extends JsonResource
+final class TagResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,17 +27,17 @@ class TagResource extends JsonResource
                 'title' => $this->resource->title,
                 'created' => new DateResource(
                     resource: $this->resource->created_at
-                )
+                ),
             ],
             'relationships' => [
                 'posts' => PostResource::collection(
                     resource: $this->whenLoaded('posts')
-                )
+                ),
             ],
             'links' => [
                 'self' => 'todo',
-                'parent' => route('api:v1:tags:index')
-            ]
+                'parent' => route('api:v1:tags:index'),
+            ],
         ];
     }
 }

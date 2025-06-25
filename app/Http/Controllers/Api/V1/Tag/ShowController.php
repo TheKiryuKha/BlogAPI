@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1\Tag;
 
 use App\Http\Resources\Api\V1\TagResource;
 use App\Models\Tag;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ShowController
+final class ShowController
 {
     public function __invoke(Tag $tag): TagResource
     {

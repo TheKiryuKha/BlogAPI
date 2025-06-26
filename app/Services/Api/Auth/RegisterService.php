@@ -8,6 +8,7 @@ use App\Enums\UserRole;
 use App\Models\User;
 use App\Payloads\Api\Auth\RegisterPayload;
 use Illuminate\Auth\AuthManager;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\NewAccessToken;
 
 final readonly class RegisterService
@@ -38,8 +39,21 @@ final readonly class RegisterService
 
     private function createUser(RegisterPayload $payload): User
     {
-        return User::create(
+        $user = User::create(
             attributes: $payload->toArray()
         );
+
+        $this->createAvatarForUser($user);
+
+        return $user;
+    }
+
+    private function createAvatarForUser(User $user): void
+    {
+        $path = Storage::disk('public')->path('default_image.png');
+
+        $user->addMedia($path)
+            ->preservingOriginal()
+            ->toMediaCollection();
     }
 }

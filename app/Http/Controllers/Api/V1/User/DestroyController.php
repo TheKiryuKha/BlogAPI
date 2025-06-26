@@ -9,15 +9,15 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 
-class DestroyController
+final class DestroyController
 {
     public function __invoke(User $user): JsonResponse
     {
-        if(Gate::denies('update-user', $user)){
+        if (Gate::denies('update-user', $user)) {
             abort(403);
         }
 
-        $user->posts()->each(function(Post $post){
+        $user->posts()->each(function (Post $post) {
             $post->comments()->delete();
             $post->tags()->detach();
             $post->delete();

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\UserRole;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -59,5 +61,16 @@ final class UserFactory extends Factory
         return $this->state(fn (array $attributes): array => [
             'role' => UserRole::Author,
         ]);
+    }
+
+    public function configure(): self
+    {
+        return $this->afterMaking(function (User $user) {
+            $path = Storage::disk('public')->path('default_image.png');
+
+            $user->addMedia($path)
+                ->preservingOriginal()
+                ->toMediaCollection();
+        });
     }
 }

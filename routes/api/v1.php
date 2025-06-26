@@ -16,7 +16,7 @@ Route::prefix('categories')->as('categories:')->group(function () {
     Route::post('/', Category\StoreController::class)->name('store');
     Route::post('/bulk', Category\BulkStoreController::class)->name('bulkStore');
     Route::get('/{category}', Category\ShowController::class)->name('show');
-    Route::patch('/{category}', Category\UpdateController::class)->name('update');
+    Route::put('/{category}', Category\UpdateController::class)->name('update');
     Route::delete('/{category}', Category\DestroyController::class)->name('destroy');
 });
 
@@ -29,7 +29,7 @@ Route::prefix('tags')->as('tags:')->group(function () {
     Route::post('/', Tag\StoreController::class)->name('store');
     Route::post('/bulk', Tag\BulkStoreController::class)->name('bulkStore');
     Route::get('/{tag}', Tag\ShowController::class)->name('show');
-    Route::patch('/{tag}', Tag\UpdateController::class)->name('update');
+    Route::put('/{tag}', Tag\UpdateController::class)->name('update');
     Route::delete('/{tag}', Tag\DestroyController::class)->name('destroy');
 });
 

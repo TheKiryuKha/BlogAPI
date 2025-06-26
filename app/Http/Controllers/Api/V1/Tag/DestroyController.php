@@ -19,10 +19,6 @@ final class DestroyController
 
         $action->handle($tag);
 
-        return response()->json(
-            data: [
-                'message' => 'Tag deleted succesfully',
-            ], status: 200
-        );
+        return response()->json(status: 204);
     }
 }

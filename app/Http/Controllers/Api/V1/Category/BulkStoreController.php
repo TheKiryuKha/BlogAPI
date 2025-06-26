@@ -14,7 +14,7 @@ final class BulkStoreController
     public function __invoke(BulkStoreRequest $request, BulkCreateCategories $action): AnonymousResourceCollection
     {
         return CategoryResource::collection(
-            $action->handle($request->payload())
+            resource: $action->handle($request->payload())
         );
     }
 }

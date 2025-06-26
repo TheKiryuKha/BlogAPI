@@ -16,7 +16,6 @@ final class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CommentSeeder::class,
             PostTagSeeder::class,
-            ImageSeeder::class,
         ]);
     }
 }

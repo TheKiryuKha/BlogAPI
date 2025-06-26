@@ -42,4 +42,5 @@ Route::prefix('users')->as('users:')->group(function () {
 
     Route::get('/{user}', User\ShowController::class)->name('show');
     Route::patch('/{user}', User\UpdateController::class)->name('update');
+    Route::delete('/{user}', User\DestroyController::class)->name('destroy');
 });

@@ -25,6 +25,9 @@ final class UserResource extends JsonResource
             'type' => 'user',
             'attributes' => [
                 'name' => $this->resource->name,
+                'avatar' => new ImageResource(
+                    resource: $this->resource->getMedia()->first()
+                ),
                 'role' => $this->resource->role,
                 'description' => $this->resource->description,
                 'email' => $this->resource->email,
@@ -39,7 +42,10 @@ final class UserResource extends JsonResource
                 // TODO comments
                 // TODO Image
             ],
-            'links' => [],
+            'links' => [
+                'self' => route('api:v1:users:show', $this->resource),
+                'parent' => route('api:v1:users:index'),
+            ],
         ];
     }
 }

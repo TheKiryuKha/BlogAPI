@@ -7,11 +7,11 @@ namespace App\Providers;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\CarbonImmutable;
-use Date;
-use DB;
-use Gate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -44,15 +44,15 @@ final class AppServiceProvider extends ServiceProvider
             return $user->tokenCan('admin');
         });
 
-        // Gate::define('can-change-post', function (User $user, Post $post): bool {
-        //     if ($user->id === $post->user_id && $user->tokenCan('author')) {
-        //         return true;
-        //     }
+        Gate::define('update-post', function (User $user, Post $post): bool {
+            if ($user->id === $post->user_id && $user->tokenCan('author')) {
+                return true;
+            }
 
-        //     return $user->tokenCan('admin');
-        // });
+            return $user->tokenCan('admin');
+        });
 
-        Gate::define('can-change-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id
+        Gate::define('update-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id
             || $user->tokenCan('admin'));
     }
 
@@ -63,17 +63,17 @@ final class AppServiceProvider extends ServiceProvider
 
     private function configureModels(): void
     {
-        Model::shouldBeStrict(! $this->app->isProduction());
+        Model::shouldBeStrict(! app()->isProduction());
         Model::unguard();
     }
 
     private function configureCommands(): void
     {
-        DB::prohibitDestructiveCommands($this->app->isProduction());
+        DB::prohibitDestructiveCommands(app()->isProduction());
     }
 
     private function configureUrls(): void
     {
-        URL::forceHttps($this->app->isProduction());
+        URL::forceHttps(app()->isProduction());
     }
 }

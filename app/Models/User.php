@@ -10,11 +10,14 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property-read int $id
@@ -27,18 +30,18 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read string|null $remember_token
  * @property-read CarbonImmutable $created_at
  * @property-read CarbonImmutable $updated_at
- * @property-read Image $avatar
  * @property-read Collection<int, Post> $posts
  * @property-read Collection<int, Comment> $comments
  * @property-read Collection<int, PersonalAccessToken> $tokens
  */
-final class User extends Authenticatable
+final class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
+    use InteractsWithMedia;
     use Notifiable;
 
     /**
@@ -67,14 +70,6 @@ final class User extends Authenticatable
     ];
 
     /**
-     * @return MorphOne<Image, $this>
-     */
-    public function avatar(): MorphOne
-    {
-        return $this->morphOne(Image::class, 'owner');
-    }
-
-    /**
      * @return HasMany<Post, $this>
      */
     public function posts(): HasMany
@@ -88,6 +83,14 @@ final class User extends Authenticatable
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Fit::Contain, 300, 300)
+            ->nonQueued();
     }
 
     /**

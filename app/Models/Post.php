@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -26,7 +25,6 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read string $status
  * @property-read CarbonImmutable $created_at
  * @property-read CarbonImmutable $updated_at
- * @property-read Image|null $image
  * @property-read User $user
  * @property-read Category $category
  * @property-read Collection<int, Comment> $comments
@@ -41,14 +39,6 @@ final class Post extends Model
     protected $casts = [
         'status' => PostStatus::class,
     ];
-
-    /**
-     * @return MorphOne<Image, $this>
-     */
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Image::class, 'owner');
-    }
 
     /**
      * @return BelongsTo<User, $this>

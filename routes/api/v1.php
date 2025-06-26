@@ -39,5 +39,7 @@ Route::prefix('tags')->as('tags:')->group(function () {
 Route::prefix('users')->as('users:')->group(function () {
 
     Route::get('/', User\IndexController::class)->name('index');
+
     Route::get('/{user}', User\ShowController::class)->name('show');
+    Route::patch('/{user}', User\UpdateController::class)->name('update');
 });

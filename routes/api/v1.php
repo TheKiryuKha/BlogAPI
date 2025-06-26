@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Api\V1\Category;
 use App\Http\Controllers\Api\V1\Tag;
+use App\Http\Controllers\Api\V1\User;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -30,4 +31,12 @@ Route::prefix('tags')->as('tags:')->group(function () {
     Route::get('/{tag}', Tag\ShowController::class)->name('show');
     Route::patch('/{tag}', Tag\UpdateController::class)->name('update');
     Route::delete('/{tag}', Tag\DestroyController::class)->name('destroy');
+});
+
+/**
+ * Users Endpoints
+ */
+Route::prefix('users')->as('users:')->group(function () {
+
+    Route::get('/', User\IndexController::class)->name('index');
 });

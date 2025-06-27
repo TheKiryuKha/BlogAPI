@@ -53,5 +53,5 @@ Route::prefix('posts')->as('posts:')->group(function () {
 
     Route::get('/', Post\IndexController::class)->name('index');
 
-    Route::get('/{post}')->name('show');
+    Route::get('/{post}', Post\ShowController::class)->name('show');
 });

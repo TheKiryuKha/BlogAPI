@@ -31,3 +31,10 @@ Route::prefix('users')
 Route::prefix('posts')
     ->as('posts:')
     ->group(base_path('routes/api/v1/group/post.php'));
+
+/**
+ * Posts Endpoints
+ */
+Route::prefix('comments')
+    ->as('comments:')
+    ->group(base_path('routes/api/v1/group/comment.php'));

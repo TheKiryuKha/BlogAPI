@@ -39,7 +39,9 @@ final class UserResource extends JsonResource
                 'posts' => PostResource::collection(
                     resource: $this->whenLoaded('posts')
                 ),
-                // TODO comments
+                'comments' => CommentResource::collection(
+                    resource: $this->whenLoaded('posts')
+                ),
             ],
             'links' => [
                 'self' => route('api:v1:users:show', $this->resource),

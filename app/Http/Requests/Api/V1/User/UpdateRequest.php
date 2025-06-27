@@ -18,15 +18,15 @@ final class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return match($this->method()){
+        return match ($this->method()) {
             'PATCH' => [
-                'role' => ['required', Rule::enum(UserRole::class)]
+                'role' => ['required', Rule::enum(UserRole::class)],
             ],
             default => [
                 'name' => ['required', 'string', 'min:1', 'max:25'],
                 'description' => ['required', 'string', 'min:1', 'max:100'],
                 'avatar' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            ] 
+            ]
         };
     }
 

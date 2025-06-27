@@ -45,6 +45,9 @@ final class PostResource extends JsonResource
                 'tags' => TagResource::collection(
                     resource: $this->whenLoaded('tags')
                 ),
+                'comments' => CommentResource::collection(
+                    resource: $this->whenLoaded('comments')
+                ),
             ],
             'links' => [
                 'self' => route('api:v1:posts:show', $this->resource),

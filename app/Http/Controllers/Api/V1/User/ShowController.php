@@ -15,7 +15,7 @@ final class ShowController
         return new UserResource(
             resource: QueryBuilder::for(
                 subject: User::where('id', $user->id)
-            )->allowedIncludes(['posts'])->first()
+            )->allowedIncludes(['posts', 'comments'])->first()
         );
     }
 }

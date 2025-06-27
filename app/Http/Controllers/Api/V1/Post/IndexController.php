@@ -16,7 +16,7 @@ final class IndexController
         return PostResource::collection(
             resource: QueryBuilder::for(
                 subject: Post::class
-            )->allowedIncludes(['user', 'category', 'tags'])
+            )->allowedIncludes(['user', 'category', 'tags', 'comments'])
                 ->paginate(10)
         );
     }

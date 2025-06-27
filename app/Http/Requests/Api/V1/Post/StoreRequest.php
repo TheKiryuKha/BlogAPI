@@ -8,7 +8,6 @@ use App\Enums\PostStatus;
 use App\Models\User;
 use App\Payloads\Api\V1\PostPayload;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 final class StoreRequest extends FormRequest

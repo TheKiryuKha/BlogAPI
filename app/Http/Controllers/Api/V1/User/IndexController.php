@@ -19,7 +19,7 @@ final class IndexController
         return UserResource::collection(
             resource: QueryBuilder::for(
                 subject: User::class
-            )->allowedIncludes(['posts'])
+            )->allowedIncludes(['posts', 'comments'])
                 ->paginate(10)
         );
     }

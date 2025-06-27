@@ -20,11 +20,13 @@ final class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => ['sometimes', 'int', 'exists:categories,id'],
-            'title' => ['sometimes', 'string', 'min:1', 'max:100'],
-            'content' => ['sometimes', 'string', 'min:1', 'max:255', 'unique:posts,content'],
-            'status' => ['sometimes', Rule::enum(PostStatus::class)],
+            'category_id' => ['required', 'int', 'exists:categories,id'],
+            'title' => ['required', 'string', 'min:1', 'max:100'],
+            'content' => ['required', 'string', 'min:1', 'max:255', 'unique:posts,content'],
+            'status' => ['required', Rule::enum(PostStatus::class)],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'tags' => ['sometimes', 'array'],
+            'tags.*' => ['sometimes', 'int', 'exists:tags,id'],
         ];
     }
 
@@ -35,18 +37,12 @@ final class UpdateRequest extends FormRequest
 
         return PostPayload::make([
             'user_id' => $post->user_id,
-            'category_id' => $this->integer('category_id') ?? $post->category_id,
-
-            'title' => $this->filled('title')
-                                    ? $this->string('title')->toString()
-                                    : $post->title,
-
-            'content' => $this->filled('content')
-                                    ? $this->string('content')->toString()
-                                    : $post->content,
-
-            'status' => $this->enum('status', PostStatus::class) ?? $post->status,
+            'category_id' => $this->integer('category_id'),
+            'title' => $this->string('title')->toString(),
+            'content' => $this->string('content')->toString(),
+            'status' => $this->enum('status', PostStatus::class),
             'image' => $this->file('image'),
+            'tags' => $this->array('tags'),
         ]);
     }
 }

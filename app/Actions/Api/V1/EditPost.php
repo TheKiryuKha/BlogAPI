@@ -27,6 +27,8 @@ final readonly class EditPost
 
             $post->update($payload->toArray());
 
+            $post->tags()->sync($payload->getTags());
+
             return $post;
         });
     }

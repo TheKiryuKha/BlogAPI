@@ -13,11 +13,6 @@ use Illuminate\Validation\Rule;
 
 final class StoreRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return Gate::allows('is-admin-or-author');
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

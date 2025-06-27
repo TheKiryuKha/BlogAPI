@@ -5,17 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\V1\Category;
 
 use App\Payloads\Api\V1\CategoryPayload;
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
 
 final class BulkStoreRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return Gate::allows('is-admin-or-author');
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

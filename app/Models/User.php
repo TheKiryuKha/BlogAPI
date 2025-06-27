@@ -30,7 +30,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read string $password
  * @property-read string|null $remember_token
  * @property-read CarbonImmutable $created_at
- * @property-read CarbonImmutable $updated_at
+ * @property-read ?CarbonImmutable $updated_at
  * @property-read Collection<int, Post> $posts
  * @property-read Collection<int, Comment> $comments
  * @property-read Collection<int, PersonalAccessToken> $tokens

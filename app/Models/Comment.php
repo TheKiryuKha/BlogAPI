@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int $post_id
  * @property-read string $text
  * @property-read CarbonImmutable $created_at
- * @property-read CarbonImmutable $updated_at
+ * @property-read ?CarbonImmutable $updated_at
  * @property-read User $user
  * @property-read Post $post
  */

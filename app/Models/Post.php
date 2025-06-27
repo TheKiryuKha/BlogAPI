@@ -28,7 +28,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read string $content
  * @property-read string $status
  * @property-read CarbonImmutable $created_at
- * @property-read CarbonImmutable $updated_at
+ * @property-read ?CarbonImmutable $updated_at
  * @property-read User $user
  * @property-read Category $category
  * @property-read Collection<int, Comment> $comments

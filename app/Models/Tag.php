@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int $id
  * @property-read string $title
  * @property-read CarbonImmutable $created_at
- * @property-read CarbonImmutable $updated_at
+ * @property-read ?CarbonImmutable $updated_at
  * @property-read Collection<int, Post> $posts
  */
 final class Tag extends Model

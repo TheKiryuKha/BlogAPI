@@ -65,7 +65,7 @@ final class UserFactory extends Factory
 
     public function configure(): self
     {
-        return $this->afterMaking(function (User $user) {
+        return $this->afterMaking(function (User $user): void {
             $path = Storage::disk('public')->path('default_image.png');
 
             $user->addMedia($path)

@@ -40,7 +40,6 @@ final class UserResource extends JsonResource
                     resource: $this->whenLoaded('posts')
                 ),
                 // TODO comments
-                // TODO Image
             ],
             'links' => [
                 'self' => route('api:v1:users:show', $this->resource),

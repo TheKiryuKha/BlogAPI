@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\V1\Category;
+use App\Http\Controllers\Api\V1\Post;
 use App\Http\Controllers\Api\V1\Tag;
 use App\Http\Controllers\Api\V1\User;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,14 @@ Route::prefix('users')->as('users:')->group(function () {
     Route::get('/{user}', User\ShowController::class)->name('show');
     Route::patch('/{user}', User\UpdateController::class)->name('update');
     Route::delete('/{user}', User\DestroyController::class)->name('destroy');
+});
+
+/**
+ * Posts Endpoints
+ */
+Route::prefix('posts')->as('posts:')->group(function () {
+
+    Route::get('/', Post\IndexController::class)->name('index');
+
+    Route::get('/{post}')->name('show');
 });

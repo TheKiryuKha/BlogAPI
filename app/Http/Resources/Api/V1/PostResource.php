@@ -26,15 +26,26 @@ final class PostResource extends JsonResource
             'attributes' => [
                 'title' => $this->resource->title,
                 'slug' => $this->resource->slug,
+                'avatar' => new ImageResource(
+                    resource: $this->resource->getMedia()->first()
+                ),
                 'content' => $this->resource->content,
                 'status' => $this->resource->status,
                 'created' => new DateResource(
-                    $this->resource->created_at
+                    resource: $this->resource->created_at
                 ),
             ],
-            'relationships' => [],
+            'relationships' => [
+                'user' => new UserResource(
+                    resource: $this->whenLoaded('user')
+                ),
+                'category' => new CategoryResource(
+                    resource: $this->whenLoaded('category')
+                ),
+            ],
             'links' => [
-                // todo
+                'self' => route('api:v1:posts:show', $this->resource),
+                'parent' => route('api:v1:posts:index'),
             ],
         ];
     }

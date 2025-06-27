@@ -17,7 +17,7 @@ final class DestroyController
             abort(403);
         }
 
-        $user->posts()->each(function (Post $post) {
+        $user->posts()->each(function (Post $post): void {
             $post->comments()->delete();
             $post->tags()->detach();
             $post->delete();

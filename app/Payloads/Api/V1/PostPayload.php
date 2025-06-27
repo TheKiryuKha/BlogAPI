@@ -16,6 +16,7 @@ final readonly class PostPayload
         private string $content,
         private PostStatus $status,
         private ?UploadedFile $image = null,
+        private ?array $tags = null
     ) {}
 
     /**
@@ -25,7 +26,8 @@ final readonly class PostPayload
      * title: string,
      * content: string,
      * status: PostStatus,
-     * image: UploadedFile|null
+     * image: UploadedFile|null,
+     * tags: array<int>|null
      * } $data
      */
     public static function make(array $data): self
@@ -36,7 +38,8 @@ final readonly class PostPayload
             title: $data['title'],
             content: $data['content'],
             status: $data['status'],
-            image: $data['image']
+            image: $data['image'],
+            tags: $data['tags']
         );
     }
 
@@ -57,5 +60,13 @@ final readonly class PostPayload
     public function getImage(): ?UploadedFile
     {
         return $this->image;
+    }
+
+    /**
+     * @return array<int>|null
+     */
+    public function getTags(): ?array
+    {
+        return $this->tags;
     }
 }

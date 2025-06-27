@@ -26,7 +26,7 @@ final class PostResource extends JsonResource
             'attributes' => [
                 'title' => $this->resource->title,
                 'slug' => $this->resource->slug,
-                'avatar' => new ImageResource(
+                'image' => new ImageResource(
                     resource: $this->resource->getMedia()->first()
                 ),
                 'content' => $this->resource->content,
@@ -41,6 +41,9 @@ final class PostResource extends JsonResource
                 ),
                 'user' => new UserResource(
                     resource: $this->whenLoaded('user')
+                ),
+                'tags' => TagResource::collection(
+                    resource: $this->whenLoaded('tags')
                 ),
             ],
             'links' => [

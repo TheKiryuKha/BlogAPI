@@ -52,9 +52,7 @@ final class AppServiceProvider extends ServiceProvider
             return $user->tokenCan('admin');
         });
 
-        Gate::define('update-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id);
-
-        Gate::define('delete-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id
+        Gate::define('update-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id
         || $user->tokenCan('admin'));
     }
 

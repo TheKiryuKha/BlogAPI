@@ -15,7 +15,7 @@ final class ShowController
         return new PostResource(
             resource: QueryBuilder::for(
                 subject: Post::where('id', $post->id)
-            )->allowedIncludes(['user', 'category'])->first()
+            )->allowedIncludes(['user', 'category', 'tags'])->first()
         );
     }
 }

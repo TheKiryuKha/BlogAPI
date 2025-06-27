@@ -8,25 +8,24 @@ use App\Models\Post;
 use App\Payloads\Api\V1\PostPayload;
 use Illuminate\Support\Facades\DB;
 
-final readonly class CreatePost
+final readonly class EditPost
 {
     public function __construct(
         private SaveImage $action
     ) {}
 
-    public function handle(PostPayload $payload): Post
+    public function handle(Post $post, PostPayload $payload): Post
     {
-        return DB::transaction(function () use ($payload) {
-            $post = Post::create($payload->toArray());
+        return DB::transaction(function () use ($post, $payload): Post {
 
             match ($payload->getImage()) {
                 null => null,
                 default => $this->action->handle(
-                    model: $post, image: $payload->getImage()
+                    $post, $payload->getImage()
                 )
             };
 
-            $post->tags()->sync($payload->getTags());
+            $post->update($payload->toArray());
 
             return $post;
         });

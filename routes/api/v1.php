@@ -54,4 +54,6 @@ Route::prefix('posts')->as('posts:')->group(function () {
     Route::get('/', Post\IndexController::class)->name('index');
     Route::post('/', Post\StoreController::class)->name('store');
     Route::get('/{post}', Post\ShowController::class)->name('show');
+    Route::patch('/{post}', Post\UpdateController::class)->name('update');
+    Route::delete('/{post}', Post\DestroyController::class)->name('destroy');
 });

@@ -31,6 +31,8 @@ final class StoreRequest extends FormRequest
             'content' => ['required', 'string', 'min:1', 'max:255', 'unique:posts,content'],
             'status' => ['sometimes', Rule::enum(PostStatus::class)],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'tags' => ['sometimes', 'array'],
+            'tags.*' => ['sometimes', 'int', 'exists:tags,id'],
         ];
     }
 
@@ -41,11 +43,12 @@ final class StoreRequest extends FormRequest
 
         return PostPayload::make([
             'user_id' => $user->id,
-            'category_id' => $this->integer('category_id') ?? 1,
+            'category_id' => $this->filled('category_id') ? $this->integer('category_id') : 1,
             'title' => $this->string('title')->toString(),
             'content' => $this->string('content')->toString(),
             'status' => $this->enum('status', PostStatus::class) ?? PostStatus::Draft,
             'image' => $this->file('image'),
+            'tags' => $this->array('tags'),
         ]);
     }
 }

@@ -31,12 +31,19 @@ final class UpdateRequest extends FormRequest
     public function payload(): UserPayload
     {
         /** @var User $user */
-        $user = $this->user();
+        $user = $this->route('user');
 
         return UserPayload::make([
-            'name' => $this->string('name')->toString() ?? $user->name,
+            'name' => $this->filled('name')
+                                ? $this->string('name')->toString()
+                                : $user->name,
+
             'role' => $this->enum('role', UserRole::class) ?? $user->role,
-            'description' => $this->string('description')->toString() ?? $user->description,
+
+            'description' => $this->filled('description')
+                                ? $this->string('description')->toString()
+                                : $user->description,
+
             'avatar' => $this->file('avatar'),
         ]);
     }

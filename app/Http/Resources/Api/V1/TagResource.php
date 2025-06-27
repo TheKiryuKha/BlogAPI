@@ -35,7 +35,7 @@ final class TagResource extends JsonResource
                 ),
             ],
             'links' => [
-                'self' => 'todo',
+                'self' => route('api:v1:tags:show', $this->resource),
                 'parent' => route('api:v1:tags:index'),
             ],
         ];

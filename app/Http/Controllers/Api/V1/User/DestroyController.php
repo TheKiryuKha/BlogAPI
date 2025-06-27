@@ -13,7 +13,7 @@ final class DestroyController
 {
     public function __invoke(User $user): JsonResponse
     {
-        if (Gate::denies('update-user', $user)) {
+        if (Gate::denies('delete-user', $user)) {
             abort(403);
         }
 

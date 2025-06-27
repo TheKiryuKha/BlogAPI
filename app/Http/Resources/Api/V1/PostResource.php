@@ -36,11 +36,11 @@ final class PostResource extends JsonResource
                 ),
             ],
             'relationships' => [
-                'user' => new UserResource(
-                    resource: $this->whenLoaded('user')
-                ),
                 'category' => new CategoryResource(
                     resource: $this->whenLoaded('category')
+                ),
+                'user' => new UserResource(
+                    resource: $this->whenLoaded('user')
                 ),
             ],
             'links' => [

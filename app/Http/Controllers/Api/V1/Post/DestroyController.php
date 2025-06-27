@@ -13,9 +13,7 @@ final class DestroyController
 {
     public function __invoke(Post $post, DeletePost $action): JsonResponse
     {
-        if (Gate::denies('update-post', $post)) {
-            abort(403);
-        }
+        Gate::authorize('delete', $post);
 
         $action->handle($post);
 

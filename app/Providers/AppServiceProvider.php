@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,32 +27,6 @@ final class AppServiceProvider extends ServiceProvider
             'user' => User::class,
             'post' => Post::class,
         ]);
-
-        $this->configureGates();
-    }
-
-    private function configureGates(): void
-    {
-        Gate::define('is-admin', fn (User $user) => $user->tokenCan('admin'));
-
-        Gate::define('is-admin-or-author', function (User $user): bool {
-            if ($user->tokenCan('author')) {
-                return true;
-            }
-
-            return $user->tokenCan('admin');
-        });
-
-        Gate::define('update-post', function (User $user, Post $post): bool {
-            if ($user->id === $post->user_id && $user->tokenCan('author')) {
-                return true;
-            }
-
-            return $user->tokenCan('admin');
-        });
-
-        Gate::define('update-user', fn (User $user, User $target_user): bool => $user->id === $target_user->id
-        || $user->tokenCan('admin'));
     }
 
     private function configureDates(): void

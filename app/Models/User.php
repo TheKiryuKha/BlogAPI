@@ -6,6 +6,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
+use App\Traits\UserFilter;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,6 +44,7 @@ final class User extends Authenticatable implements HasMedia
 
     use InteractsWithMedia;
     use Notifiable;
+    use UserFilter;
 
     /**
      * The attributes that are mass assignable.

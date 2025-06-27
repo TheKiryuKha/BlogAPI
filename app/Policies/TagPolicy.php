@@ -6,7 +6,7 @@ namespace App\Policies;
 
 use App\Models\User;
 
-final class CategoryPolicy
+final class TagPolicy
 {
     public function create(User $user): bool
     {

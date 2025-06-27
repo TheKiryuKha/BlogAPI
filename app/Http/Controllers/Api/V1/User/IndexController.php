@@ -14,9 +14,7 @@ final class IndexController
 {
     public function __invoke(): AnonymousResourceCollection
     {
-        if (Gate::denies('is-admin')) {
-            abort(403);
-        }
+        Gate::authorize('viewAny', User::class);
 
         return UserResource::collection(
             resource: QueryBuilder::for(

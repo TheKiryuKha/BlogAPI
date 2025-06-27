@@ -14,9 +14,7 @@ final class UpdateController
 {
     public function __invoke(Post $post, EditPost $action, UpdateRequest $request): PostResource
     {
-        if (Gate::denies('update-post', $post)) {
-            abort(403);
-        }
+        Gate::authorize('update', $post);
 
         return new PostResource(
             resource: $action->handle(

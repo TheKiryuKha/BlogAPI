@@ -13,9 +13,7 @@ final class DestroyController
 {
     public function __invoke(Tag $tag, DeleteTag $action): JsonResponse
     {
-        if (Gate::denies('is-admin')) {
-            abort(403);
-        }
+        Gate::authorize('destroy', Tag::class);
 
         $action->handle($tag);
 

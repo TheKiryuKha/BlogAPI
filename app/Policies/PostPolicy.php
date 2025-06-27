@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
+use App\Models\Post;
 use App\Models\User;
 
-final class CategoryPolicy
+final class PostPolicy
 {
     public function create(User $user): bool
     {
@@ -17,13 +18,13 @@ final class CategoryPolicy
         return $user->isAuthor();
     }
 
-    public function update(User $user): bool
+    public function update(User $user, Post $post): bool
     {
-        return $user->isAdmin();
+        return $user->id === $post->user_id;
     }
 
-    public function delete(User $user): bool
+    public function delete(User $user, Post $post): bool
     {
-        return $user->isAuthor();
+        return $user->id === $post->user_id || $user->isAdmin();
     }
 }

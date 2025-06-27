@@ -13,9 +13,7 @@ final class DestroyController
 {
     public function __invoke(Category $category, DeleteCategory $action): JsonResponse
     {
-        if (Gate::denies('is-admin')) {
-            abort(403);
-        }
+        Gate::authorize('delete', Category::class);
 
         $action->handle($category);
 

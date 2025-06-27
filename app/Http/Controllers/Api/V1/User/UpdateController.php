@@ -14,9 +14,7 @@ final class UpdateController
 {
     public function __invoke(User $user, EditUser $action, UpdateRequest $request): UserResource
     {
-        if (Gate::denies('update-user', $user)) {
-            abort(403);
-        }
+        Gate::authorize('update', $user);
 
         return new UserResource(
             resource: $action->handle(

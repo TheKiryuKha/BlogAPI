@@ -13,6 +13,16 @@ final class UserPolicy
         return $user->isAdmin();
     }
 
+    public function update(User $user, User $tagtet_user): bool
+    {
+        return $user->id === $tagtet_user->id;
+    }
+
+    public function updateRole(User $user): bool
+    {
+        return $user->isAdmin();
+    }
+
     public function delete(User $user, User $taget_user): bool
     {
         return $user->id === $taget_user->id || $user->isAdmin();

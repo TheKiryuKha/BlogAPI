@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\V1\User;
 
 use App\Enums\UserRole;
-use App\Models\User;
 use App\Payloads\Api\V1\UserPayload;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,43 +18,26 @@ final class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['sometimes', 'string', 'min:1', 'max:25'],
-            'role' => ['sometimes', Rule::enum(UserRole::class)],
-            'description' => ['sometimes', 'string', 'min:1', 'max:100'],
-            'avatar' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-        ];
+        return match($this->method()){
+            'PATCH' => [
+                'role' => ['required', Rule::enum(UserRole::class)]
+            ],
+            default => [
+                'name' => ['required', 'string', 'min:1', 'max:25'],
+                'description' => ['required', 'string', 'min:1', 'max:100'],
+                'avatar' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            ] 
+        };
     }
 
     public function payload(): UserPayload
     {
-        /** @var User $user */
-        $user = $this->route('user');
-
         return UserPayload::make([
-            'name' => $this->filled('name')
-                                ? $this->string('name')->toString()
-                                : $user->name,
+            'name' => $this->string('name')->toString(),
 
-            'role' => $this->enum('role', UserRole::class) ?? $user->role,
-
-            'description' => $this->filled('description')
-                                ? $this->string('description')->toString()
-                                : $user->description,
+            'description' => $this->string('description')->toString(),
 
             'avatar' => $this->file('avatar'),
         ]);
-    }
-
-    public function withValidator(Validator $validator): void
-    {
-        $validator->after(function ($validator): void {
-            if ($this->has('role') && $this->user()->tokenCant('admin')) {
-                $validator->errors()->add(
-                    'role',
-                    'You do not have permission to change this field'
-                );
-            }
-        });
     }
 }

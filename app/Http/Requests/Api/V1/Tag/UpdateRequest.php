@@ -6,15 +6,9 @@ namespace App\Http\Requests\Api\V1\Tag;
 
 use App\Payloads\Api\V1\TagPayload;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 final class UpdateRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return Gate::allows('is-admin-or-author');
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

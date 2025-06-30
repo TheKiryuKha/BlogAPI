@@ -34,7 +34,7 @@ test('index endpoint with posts included', function () {
         ->getJson(
             route(
                 'api:v1:categories:index',
-                ['include' => 'posts']
+                ['includes' => 'posts']
             )
         );
 

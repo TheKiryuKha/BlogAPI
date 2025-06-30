@@ -24,6 +24,6 @@ final class TagPolicy
 
     public function delete(User $user): bool
     {
-        return $user->isAuthor();
+        return $user->isAdmin();
     }
 }

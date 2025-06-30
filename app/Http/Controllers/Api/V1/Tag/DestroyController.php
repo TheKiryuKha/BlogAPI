@@ -13,7 +13,7 @@ final class DestroyController
 {
     public function __invoke(Tag $tag, DeleteTag $action): JsonResponse
     {
-        Gate::authorize('destroy', Tag::class);
+        Gate::authorize('delete', Tag::class);
 
         $action->handle($tag);
 

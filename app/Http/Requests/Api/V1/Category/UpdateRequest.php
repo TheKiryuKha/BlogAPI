@@ -28,6 +28,7 @@ final class UpdateRequest extends FormRequest
                 'string',
                 'min:1',
                 'max:255',
+                'unique:categories,title',
             ],
         ];
     }

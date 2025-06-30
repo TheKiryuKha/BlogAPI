@@ -33,7 +33,7 @@ Route::prefix('posts')
     ->group(base_path('routes/api/v1/group/post.php'));
 
 /**
- * Posts Endpoints
+ * Comments Endpoints
  */
 Route::prefix('comments')
     ->as('comments:')

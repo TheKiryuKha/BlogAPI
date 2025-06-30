@@ -13,7 +13,7 @@ final class UpdateController
 {
     public function __invoke(Category $category, UpdateRequest $request): CategoryResource
     {
-        Gate::authorize('update', Category::class);
+        Gate::authorize('update', $category);
 
         return new CategoryResource(
             resource: $category->update(

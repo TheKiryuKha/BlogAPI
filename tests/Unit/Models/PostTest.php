@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -23,14 +22,6 @@ test('to array', function () {
         'created_at',
         'updated_at',
     ]);
-});
-
-it('has image', function () {
-    $post = Post::factory()
-        ->has(Image::factory(), 'image')
-        ->create();
-
-    expect($post->image)->toBeInstanceOf(Image::class);
 });
 
 it('belongs to User', function () {

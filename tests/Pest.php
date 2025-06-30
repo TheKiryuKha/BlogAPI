@@ -14,8 +14,14 @@ declare(strict_types=1);
 */
 
 pest()->extend(Tests\TestCase::class)
+    ->group('feature')
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature', 'Unit');
+    ->in('Feature');
+
+pest()->extend(Tests\TestCase::class)
+    ->group('unit')
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Unit');
 
 /*
 |--------------------------------------------------------------------------

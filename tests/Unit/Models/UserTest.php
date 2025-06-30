@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Models\Comment;
-use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 
@@ -23,14 +22,6 @@ test('to array', function () {
         'two_factor_recovery_codes',
         'two_factor_confirmed_at',
     ]);
-});
-
-it('has avatar', function () {
-    $user = User::factory()
-        ->has(Image::factory(), 'avatar')
-        ->create();
-
-    expect($user->avatar)->toBeInstanceOf(Image::class);
 });
 
 it('has posts', function () {

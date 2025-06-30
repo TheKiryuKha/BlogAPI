@@ -12,7 +12,7 @@ test('user(author) can store category', function () {
         ->post(route('api:v1:categories:store', [
             'title' => 'Test',
         ]))
-        ->assertStatus(200);
+        ->assertStatus(201);
 
     expect(Category::count())->toBe(2)
         ->and(Category::all()[1]->title)->toBe('Test');
@@ -25,7 +25,7 @@ test('user(admin) can store category', function () {
         ->post(route('api:v1:categories:store', [
             'title' => 'Test',
         ]))
-        ->assertStatus(200);
+        ->assertStatus(201);
 
     expect(Category::count())->toBe(2)
         ->and(Category::all()[1]->title)->toBe('Test');

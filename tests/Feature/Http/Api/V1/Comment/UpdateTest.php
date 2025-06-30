@@ -18,7 +18,7 @@ test('user can update his comment', function () {
         ->assertStatus(200);
 
     expect($comment->refresh()->text)->toBe('new Text');
-})->only();
+});
 
 test('Nobody can update not his comment', function () {
     $user = User::factory()->create();
@@ -43,4 +43,4 @@ test('Nobody can update not his comment', function () {
             'text' => 'new Text',
         ])
         ->assertStatus(403);
-})->only();
+});

@@ -13,12 +13,12 @@ final class UpdateController
 {
     public function __invoke(Category $category, UpdateRequest $request): CategoryResource
     {
-        Gate::authorize('update', $category);
+        Gate::authorize('update', Category::class);
 
-        return new CategoryResource(
-            resource: $category->update(
-                attributes: $request->payload()->toArray()
-            )
+        $category->update(
+            $request->payload()->toArray()
         );
+
+        return new CategoryResource($category);
     }
 }

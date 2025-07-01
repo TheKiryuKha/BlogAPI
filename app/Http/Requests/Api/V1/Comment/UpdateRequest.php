@@ -6,6 +6,7 @@ namespace App\Http\Requests\Api\V1\Comment;
 
 use App\Payloads\Api\V1\CommentPayload;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Comment;
 
 final class UpdateRequest extends FormRequest
 {
@@ -23,6 +24,7 @@ final class UpdateRequest extends FormRequest
 
     public function payload(): CommentPayload
     {
+        /** @var Comment $comment */
         $comment = $this->route('comment');
 
         return CommentPayload::make([

@@ -8,6 +8,7 @@ use App\Enums\UserRole;
 use App\Payloads\Api\V1\UserPayload;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 
 final class UpdateRequest extends FormRequest
 {
@@ -32,12 +33,16 @@ final class UpdateRequest extends FormRequest
 
     public function payload(): UserPayload
     {
+        /** @var User $user */
+        $user = $this->route('user');
+
         return UserPayload::make([
             'name' => $this->string('name')->toString(),
 
             'description' => $this->string('description')->toString(),
 
             'avatar' => $this->file('avatar'),
+            'role' => $user->role
         ]);
     }
 }

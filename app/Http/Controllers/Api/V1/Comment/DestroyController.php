@@ -12,7 +12,7 @@ final class DestroyController
 {
     public function __invoke(Comment $comment): JsonResponse
     {
-        Gate::authorize('destroy', $comment);
+        Gate::authorize('delete', $comment);
 
         $comment->delete();
 

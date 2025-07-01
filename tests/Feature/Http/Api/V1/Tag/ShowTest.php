@@ -9,12 +9,12 @@ beforeEach(fn () => $this->tag = Tag::factory()->create());
 
 it('returns the correct status code if unauthenticated', function () {
     $this->getJson(
-        route('api:v1:tags:show')
+        route('api:v1:tags:show', $this->tag)
     )->assertStatus(401);
 });
 
 it('returns the correct status code if authenticated', function () {
     $this->actingAs(User::factory()->create())->getJson(
-        route('api:v1:tags:index')
+        route('api:v1:tags:show', $this->tag)
     )->assertStatus(200);
 });

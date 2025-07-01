@@ -33,7 +33,7 @@ test('only user can update his profile information', function () {
 
 it('returns the correct status code if unauthenticated', function () {
     $user = User::factory()->create();
-    
+
     $this->getJson(
         route('api:v1:users:show', $user)
     )->assertStatus(401);

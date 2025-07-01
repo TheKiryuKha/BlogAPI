@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\V1\User;
 
 use App\Enums\UserRole;
+use App\Models\User;
 use App\Payloads\Api\V1\UserPayload;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\User;
 
 final class UpdateRequest extends FormRequest
 {
@@ -42,7 +42,7 @@ final class UpdateRequest extends FormRequest
             'description' => $this->string('description')->toString(),
 
             'avatar' => $this->file('avatar'),
-            'role' => $user->role
+            'role' => $user->role,
         ]);
     }
 }

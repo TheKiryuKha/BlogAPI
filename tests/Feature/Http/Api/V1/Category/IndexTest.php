@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 
-it('returns the correct code if unauthentitficated', function(){
+it('returns the correct code if unauthentitficated', function () {
     $this->getJson(
         route('api:v1:categories:index')
     )->assertStatus(
@@ -10,7 +12,7 @@ it('returns the correct code if unauthentitficated', function(){
     );
 });
 
-it('returns the correct code if authentitficated', function(){
+it('returns the correct code if authentitficated', function () {
     $this->actingAs(User::factory()->create())->getJson(
         route('api:v1:categories:index')
     )->assertStatus(

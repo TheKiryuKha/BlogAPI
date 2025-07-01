@@ -91,8 +91,7 @@ final class User extends Authenticatable implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+            ->fit(Fit::Contain, 300, 300);
     }
 
     /**

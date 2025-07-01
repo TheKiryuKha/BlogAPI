@@ -28,10 +28,17 @@ final class BulkStoreRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return Collection<int, CategoryPayload>
+     */
     public function payload(): Collection
     {
-        return collect($this->validated())->map(
-            fn (array $category): CategoryPayload => CategoryPayload::make($category)
+        /** @var array<array-key, array{title: string}> $validated */
+        $validated = $this->validated();
+
+        return collect(array_values($validated))->map(
+            /** @property array{title:string } $tag */
+            fn (array $tag, int $key): CategoryPayload => CategoryPayload::make($tag)
         );
     }
 }

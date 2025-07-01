@@ -6,13 +6,12 @@ namespace App\Actions\Api\V1;
 
 use App\Models\Category;
 use DB;
-use Illuminate\Database\Eloquent\Collection;
 
 final readonly class DeleteCategory
 {
     public function handle(Category $category): bool
     {
-        return DB::transaction(function () use ($category) {
+        return DB::transaction(function () use ($category): true {
             $category->posts()->update(['category_id' => 1]);
             $category->delete();
 

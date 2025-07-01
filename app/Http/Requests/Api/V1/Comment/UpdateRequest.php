@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Api\V1\Comment;
 
+use App\Models\Comment;
 use App\Payloads\Api\V1\CommentPayload;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Comment;
 
 final class UpdateRequest extends FormRequest
 {

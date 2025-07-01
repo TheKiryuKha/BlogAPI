@@ -35,14 +35,20 @@ final class UpdateRequest extends FormRequest
         /** @var Post $post */
         $post = $this->route('post');
 
+        /** @var array<int|null> $tags */
+        $tags = $this->array('tags');
+
+        /** @var PostStatus $status */
+        $status = $this->enum('status', PostStatus::class);
+
         return PostPayload::make([
             'user_id' => $post->user_id,
             'category_id' => $this->integer('category_id'),
             'title' => $this->string('title')->toString(),
             'content' => $this->string('content')->toString(),
-            'status' => $this->enum('status', PostStatus::class),
+            'status' => $status,
             'image' => $this->file('image'),
-            'tags' => $this->array('tags'),
+            'tags' => $tags,
         ]);
     }
 }

@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace App\Payloads\Api\V1;
 
 use App\Enums\PostStatus;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 
 final readonly class PostPayload
 {
+    /**
+     * @param  array<int|null>  $tags
+     */
     public function __construct(
         private int $user_id,
         private int $category_id,
         private string $title,
         private string $content,
         private PostStatus $status,
+        private array $tags,
         private ?UploadedFile $image = null,
-        private ?array $tags = null
     ) {}
 
     /**
@@ -28,7 +30,7 @@ final readonly class PostPayload
      * content: string,
      * status: PostStatus,
      * image: UploadedFile|null,
-     * tags: array<int>|null
+     * tags: array<int|null>
      * } $data
      */
     public static function make(array $data): self
@@ -63,8 +65,11 @@ final readonly class PostPayload
         return $this->image;
     }
 
-    public function getTags(): Collection
+    /**
+     * @return array<int|null>
+     */
+    public function getTags(): array
     {
-        return collect($this->tags);
+        return $this->tags;
     }
 }

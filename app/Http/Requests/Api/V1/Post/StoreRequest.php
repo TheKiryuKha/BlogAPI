@@ -35,6 +35,9 @@ final class StoreRequest extends FormRequest
         /** @var User $user */
         $user = $this->user();
 
+        /** @var array<int|null> $tags */
+        $tags = $this->array('tags');
+
         return PostPayload::make([
             'user_id' => $user->id,
             'category_id' => $this->filled('category_id') ? $this->integer('category_id') : 1,
@@ -42,7 +45,7 @@ final class StoreRequest extends FormRequest
             'content' => $this->string('content')->toString(),
             'status' => $this->enum('status', PostStatus::class) ?? PostStatus::Draft,
             'image' => $this->file('image'),
-            'tags' => $this->array('tags'),
+            'tags' => $tags,
         ]);
     }
 }

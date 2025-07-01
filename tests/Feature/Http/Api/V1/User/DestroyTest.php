@@ -2,10 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 
 test('user can delete his account', function () {
     $user = User::factory()->create();
+    $post = Post::factory()->has(
+        factory: Tag::factory()
+    )->create([
+        'user_id' => $user->id,
+    ]);
 
     $this->actingAs($user)
         ->delete(route('api:v1:users:destroy', $user))

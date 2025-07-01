@@ -63,7 +63,7 @@ test('user(reader) cannot create post', function () {
         ->assertStatus(403);
 });
 
-test("user(admin) can create post with an image", function(){
+test('user(admin) can create post with an image', function () {
     $user = User::factory()->admin()->create();
     $category = Category::factory()->create();
     $post = [
@@ -72,7 +72,7 @@ test("user(admin) can create post with an image", function(){
         'category_id' => $category->id,
         'status' => 'draft',
         'content' => 'Test',
-        'image' => UploadedFile::fake()->image('test.png')
+        'image' => UploadedFile::fake()->image('test.png'),
     ];
 
     $this->actingAs($user)

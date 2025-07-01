@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Payloads\Api\V1;
 
 use App\Enums\PostStatus;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 
 final readonly class PostPayload
@@ -62,11 +63,8 @@ final readonly class PostPayload
         return $this->image;
     }
 
-    /**
-     * @return array<int>|null
-     */
-    public function getTags(): ?array
+    public function getTags(): Collection
     {
-        return $this->tags;
+        return collect($this->tags);
     }
 }

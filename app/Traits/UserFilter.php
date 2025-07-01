@@ -17,9 +17,4 @@ trait UserFilter
     {
         return $this->tokenCan('author') && $this->role === UserRole::Author;
     }
-
-    public function isReader(): bool
-    {
-        return $this->tokenCan('reader') && $this->role === UserRole::Reader;
-    }
 }

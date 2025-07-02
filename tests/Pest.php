@@ -43,6 +43,16 @@ expect()->extend('toBeOne', function () {
 |
 */
 
+uses()->beforeEach(function () {
+    Storage::fake('public');
+})->in('Feature');
+
+uses()->afterEach(function () {
+    foreach (Spatie\MediaLibrary\MediaCollections\Models\Media::all() as $media) {
+        $media->delete();
+    }
+})->in('Feature', 'Unit');
+
 function something()
 {
     // ..

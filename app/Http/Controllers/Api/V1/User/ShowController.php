@@ -6,16 +6,19 @@ namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Queries\FetchRealtions;
 
 final class ShowController
 {
-    public function __invoke(User $user): UserResource
+    public function __invoke(User $user, FetchRealtions $query): UserResource
     {
+        $user = $query->handle(
+            query: User::query()->where('id', $user->id),
+            relations: ['posts', 'comments']
+        );
+
         return new UserResource(
-            resource: QueryBuilder::for(
-                subject: User::where('id', $user->id)
-            )->allowedIncludes(['posts', 'comments'])->first()
+            resource: $user->first()
         );
     }
 }

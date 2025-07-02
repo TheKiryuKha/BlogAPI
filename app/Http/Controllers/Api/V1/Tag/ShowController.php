@@ -6,16 +6,19 @@ namespace App\Http\Controllers\Api\V1\Tag;
 
 use App\Http\Resources\Api\V1\TagResource;
 use App\Models\Tag;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Queries\FetchRealtions;
 
 final class ShowController
 {
-    public function __invoke(Tag $tag): TagResource
+    public function __invoke(Tag $tag, FetchRealtions $query): TagResource
     {
+        $tag = $query->handle(
+            query: Tag::query()->where('id', $tag->id),
+            relations: ['posts']
+        );
+
         return new TagResource(
-            resource: QueryBuilder::for(
-                subject: Tag::where('id', $tag->id)
-            )->allowedIncludes(['posts'])->first()
+            resource: $tag->first()
         );
     }
 }

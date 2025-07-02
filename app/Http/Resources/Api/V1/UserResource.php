@@ -40,7 +40,7 @@ final class UserResource extends JsonResource
                     resource: $this->whenLoaded('posts')
                 ),
                 'comments' => CommentResource::collection(
-                    resource: $this->whenLoaded('posts')
+                    resource: $this->whenLoaded('comments')
                 ),
             ],
             'links' => [

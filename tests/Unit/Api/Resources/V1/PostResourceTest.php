@@ -13,7 +13,6 @@ it('returns right data', function () {
 
     $data = $resource->toArray(request());
 
-    // TODO refactor. Endure in pest hepler function
     $this->assertArrayHasKey('id', $data);
     $this->assertArrayHasKey('type', $data);
     $this->assertArrayHasKey('attributes', $data);

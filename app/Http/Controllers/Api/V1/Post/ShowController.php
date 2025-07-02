@@ -6,16 +6,18 @@ namespace App\Http\Controllers\Api\V1\Post;
 
 use App\Http\Resources\Api\V1\PostResource;
 use App\Models\Post;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Queries\FetchPostWithRelations;
 
 final class ShowController
 {
-    public function __invoke(Post $post): PostResource
+    public function __invoke(Post $post, FetchPostWithRelations $query): PostResource
     {
+        $post = $query->handle(
+            query: Post::query()->where('id', $post->id)
+        );
+
         return new PostResource(
-            resource: QueryBuilder::for(
-                subject: Post::where('id', $post->id)
-            )->allowedIncludes(['user', 'category', 'tags', 'comments'])->first()
+            resource: $post->first()
         );
     }
 }

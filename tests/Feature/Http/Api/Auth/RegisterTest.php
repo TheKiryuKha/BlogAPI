@@ -7,6 +7,9 @@ use App\Models\User;
 use Laravel\Sanctum\PersonalAccessToken;
 
 test('user can register and get his token', function () {
+    $original = Storage::getFacadeRoot();
+    Storage::swap(new Illuminate\Filesystem\FilesystemManager(app()));
+
     $response = $this->post(route('api:auth:register'), [
         'name' => 'test',
         'email' => 'test@gmail.com',
@@ -25,4 +28,6 @@ test('user can register and get his token', function () {
         ->name->toBe('test')
         ->email->toBe('test@gmail.com')
         ->role->toBe(UserRole::Reader);
+
+    Storage::swap($original);
 });

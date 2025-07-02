@@ -6,17 +6,20 @@ namespace App\Http\Controllers\Api\V1\Tag;
 
 use App\Http\Resources\Api\V1\TagResource;
 use App\Models\Tag;
+use App\Queries\FetchRealtions;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Spatie\QueryBuilder\QueryBuilder;
 
 final class IndexController
 {
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(FetchRealtions $query): AnonymousResourceCollection
     {
+        $tags = $query->handle(
+            query: Tag::query(),
+            relations: ['posts']
+        );
+
         return TagResource::collection(
-            resource: QueryBuilder::for(
-                subject: Tag::class
-            )->allowedIncludes(['posts'])->paginate(10)
+            resource: $tags->paginate(10)
         );
     }
 }

@@ -6,18 +6,19 @@ namespace App\Http\Controllers\Api\V1\Post;
 
 use App\Http\Resources\Api\V1\PostResource;
 use App\Models\Post;
+use App\Queries\FetchPostWithRelations;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Spatie\QueryBuilder\QueryBuilder;
 
 final class IndexController
 {
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(FetchPostWithRelations $query): AnonymousResourceCollection
     {
+        $posts = $query->handle(
+            query: Post::query()
+        );
+
         return PostResource::collection(
-            resource: QueryBuilder::for(
-                subject: Post::class
-            )->allowedIncludes(['user', 'category', 'tags', 'comments'])
-                ->paginate(10)
+            resource: $posts->paginate(10)
         );
     }
 }

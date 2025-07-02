@@ -6,19 +6,23 @@ namespace App\Http\Controllers\Api\V1\Comment;
 
 use App\Http\Resources\Api\V1\CommentResource;
 use App\Models\Comment;
+use App\Queries\FetchRealtions;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Gate;
-use Spatie\QueryBuilder\QueryBuilder;
 
 final class IndexController
 {
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(FetchRealtions $query): AnonymousResourceCollection
     {
         Gate::authorize('viewAny', Comment::class);
 
+        $comments = $query->handle(
+            query: Comment::query(),
+            relations: ['post', 'user']
+        );
+
         return CommentResource::collection(
-            resource: QueryBuilder::for(Comment::class)
-                ->allowedIncludes(['post', 'user'])->paginate(10)
+            resource: $comments->paginate(10)
         );
     }
 }

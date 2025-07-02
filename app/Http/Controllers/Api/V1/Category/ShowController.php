@@ -6,16 +6,19 @@ namespace App\Http\Controllers\Api\V1\Category;
 
 use App\Http\Resources\Api\V1\CategoryResource;
 use App\Models\Category;
-use Spatie\QueryBuilder\QueryBuilder;
+use App\Queries\FetchRealtions;
 
 final class ShowController
 {
-    public function __invoke(Category $category): CategoryResource
+    public function __invoke(Category $category, FetchRealtions $query): CategoryResource
     {
+        $category = $query->handle(
+            query: Category::query()->where('id', $category->id),
+            relations: ['posts']
+        );
+
         return new CategoryResource(
-            resource: QueryBuilder::for(
-                subject: Category::where('id', $category->id)
-            )->allowedIncludes(['posts'])->first()
+            resource: $category->first()
         );
     }
 }

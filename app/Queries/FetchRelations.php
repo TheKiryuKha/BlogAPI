@@ -8,7 +8,7 @@ use App\Queries\Contracts\FetchRelationsContract;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\QueryBuilder;
 
-final readonly class FetchRealtions implements FetchRelationsContract
+final readonly class FetchRelations implements FetchRelationsContract
 {
     public function handle(Builder $query, array $relations): Builder
     {

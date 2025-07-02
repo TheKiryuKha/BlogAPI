@@ -6,6 +6,12 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Queries\Contracts\FetchRelationsContract;
+use App\Queries\Contracts\PostQueryContract;
+use App\Queries\Contracts\UserQueryContract;
+use App\Queries\FetchRelations;
+use App\Queries\PostQuery;
+use App\Queries\UserQuery;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -16,6 +22,13 @@ use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+        $this->app->bind(FetchRelationsContract::class, FetchRelations::class);
+        $this->app->bind(PostQueryContract::class, PostQuery::class);
+        $this->app->bind(UserQueryContract::class, UserQuery::class);
+    }
+
     public function boot(): void
     {
         $this->configureCommands();

@@ -6,11 +6,11 @@ namespace App\Http\Controllers\Api\V1\Comment;
 
 use App\Http\Resources\Api\V1\CommentResource;
 use App\Models\Comment;
-use App\Queries\FetchRealtions;
+use App\Queries\Contracts\FetchRelationsContract;
 
 final class ShowController
 {
-    public function __invoke(Comment $comment, FetchRealtions $query): CommentResource
+    public function __invoke(Comment $comment, FetchRelationsContract $query): CommentResource
     {
         $comment = $query->handle(
             query: Comment::query()->where('id', $comment->id),

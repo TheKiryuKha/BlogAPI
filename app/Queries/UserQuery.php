@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace App\Queries;
 
-use App\Models\Post;
+use App\Queries\Contracts\UserQueryContract;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-final readonly class FetchPostWithRelations
+final readonly class UserQuery implements UserQueryContract
 {
-    /**
-     * @param  Builder<Post>  $query
-     * @return Builder<Post>
-     */
     public function handle(Builder $query): Builder
     {
         return QueryBuilder::for(
             subject: $query
         )->allowedIncludes(
-            includes: ['user', 'category', 'tags', 'comments']
-        )->getEloquentBuilder();
+            includes: ['posts', 'comments']
+        )->allowedFilters([
+            AllowedFilter::exact('role'),
+        ])->getEloquentBuilder();
     }
 }

@@ -6,11 +6,11 @@ namespace App\Http\Controllers\Api\V1\Category;
 
 use App\Http\Resources\Api\V1\CategoryResource;
 use App\Models\Category;
-use App\Queries\FetchRealtions;
+use App\Queries\Contracts\FetchRelationsContract;
 
 final class ShowController
 {
-    public function __invoke(Category $category, FetchRealtions $query): CategoryResource
+    public function __invoke(Category $category, FetchRelationsContract $query): CategoryResource
     {
         $category = $query->handle(
             query: Category::query()->where('id', $category->id),

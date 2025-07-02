@@ -14,8 +14,14 @@ declare(strict_types=1);
 */
 
 pest()->extend(Tests\TestCase::class)
+    ->group('feature')
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature', 'Unit');
+    ->in('Feature');
+
+pest()->extend(Tests\TestCase::class)
+    ->group('unit')
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +51,7 @@ expect()->extend('toBeOne', function () {
 
 uses()->beforeEach(function () {
     Storage::fake('public');
-})->in('Feature');
+})->in('Feature', 'Unit');
 
 uses()->afterEach(function () {
     foreach (Spatie\MediaLibrary\MediaCollections\Models\Media::all() as $media) {

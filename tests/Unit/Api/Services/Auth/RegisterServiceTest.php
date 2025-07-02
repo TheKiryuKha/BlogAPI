@@ -8,6 +8,9 @@ use App\Payloads\Api\Auth\RegisterPayload;
 use App\Services\Api\Auth\RegisterService;
 
 it('register user and creates token for him', function () {
+    $original = Storage::getFacadeRoot();
+    Storage::swap(new Illuminate\Filesystem\FilesystemManager(app()));
+
     $service = app(RegisterService::class);
     $payload = RegisterPayload::make([
         'name' => 'test',
@@ -26,4 +29,6 @@ it('register user and creates token for him', function () {
         ->role->toBe(UserRole::Reader);
 
     $this->assertTrue($token->accessToken->can('reader'));
+
+    Storage::swap($original);
 });

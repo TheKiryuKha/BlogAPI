@@ -22,7 +22,7 @@ use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->app->bind(FetchRelationsContract::class, FetchRelations::class);
         $this->app->bind(PostQueryContract::class, PostQuery::class);

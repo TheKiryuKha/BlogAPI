@@ -10,15 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 final readonly class DeleteUser
 {
+    public function __construct(
+        private DeletePost $action
+    ) {}
+
     public function handle(User $user): bool
     {
         return DB::transaction(function () use ($user): true {
 
-            $user->posts()->each(function (Post $post): void {
-                $post->comments()->delete();
-                $post->tags()->detach();
-                $post->delete();
-            });
+            $user->posts()->each(
+                fn (Post $post): bool => $this->action->handle(
+                    post: $post
+                )
+            );
 
             $user->comments()->delete();
 

@@ -17,7 +17,7 @@ final readonly class SaveImage
         return DB::transaction(function () use ($model, $image): true {
 
             $model->getMedia()->each(
-                fn (Media $media): mixed => $media->delete()
+                fn (Media $media) => $media->delete()
             );
 
             $model->addMedia($image)

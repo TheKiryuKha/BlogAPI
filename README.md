@@ -36,7 +36,13 @@ Additional features:
 
 ## Installation guide
 
-(work on progress)
+1. clone this repo
+2. rename env.example to env. and fill it with necessary data
+3. run following command in your terminal
+
+```
+composer install:app
+```
 
 ## How to tweak this project for your own uses
 

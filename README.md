@@ -44,6 +44,14 @@ Additional features:
 composer install:app
 ```
 
+To fill your database with test data, run this command:
+
+```
+php artisan db:seed
+```
+
+**!ATTENTION: don't do that in production!**
+
 ## How to tweak this project for your own uses
 
 Since this is a template project, feel free to clone and modify it for your own needs. It serves as a good starter boilerplate
@@ -52,8 +60,8 @@ Since this is a template project, feel free to clone and modify it for your own 
 
 If you encounter any issues, please:
 
-* Submit a pull request with your fixes (preferably following Conventional Commits), or
-* Contact me on Telegram: @mr_TheKiryuKha
+* Submit a pull request with your fixes (preferably following <a href=https://www.conventionalcommits.org/en/v1.0.0/>Conventional Commits</a>), or
+* Contact me on Telegram: <a href=https://t.me/mr_TheKiryuKha>@mr_TheKiryuKha</a>
 
 ## Like this project?
 
